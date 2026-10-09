@@ -1,0 +1,25 @@
+function Auth({mode, onBack, onSuccess}) {
+  const login = mode === "login";
+  return <div className="auth-page">
+    <div className="auth-brand"><Logo/><button className="btn btn-ghost" onClick={onBack}>← Back to website</button></div>
+    <div className="auth-wrap">
+      <div className="auth-copy">
+        <div className="eyebrow"><Sparkles size={15}/> Welcome to your campus sphere</div>
+        <h1>{login ? "Welcome back." : "Build your skill profile."}</h1>
+        <p>{login ? "Continue discovering people, projects and learning opportunities." : "Create one profile and let SkillSphere connect you to the right people."}</p>
+        <div className="auth-benefits"><div><CheckCircle2/> Smart teammate recommendations</div><div><CheckCircle2/> Skill gap and learning insights</div><div><CheckCircle2/> Projects, mentors and study groups</div></div>
+      </div>
+      <form className="auth-card" onSubmit={(e)=>{e.preventDefault();onSuccess();}}>
+        <h2>{login ? "Sign in" : "Create account"}</h2><p className="muted">{login ? "Enter your details to continue." : "It takes less than a minute."}</p>
+        {!login && <label>Full name<input placeholder="Your name" required/></label>}
+        <label>Email address<input type="email" placeholder="you@college.edu" required/></label>
+        <label>Password<input type="password" placeholder="••••••••" required/></label>
+        {!login && <label>I'm a <select><option>Student</option><option>Mentor</option></select></label>}
+        <button className="btn btn-primary full" type="submit">{login ? "Sign in" : "Create my account"} <ArrowRight size={17}/></button>
+        <div className="auth-switch">{login ? "New to SkillSphere?" : "Already have an account?"} <button type="button" onClick={onBack}>{login ? "Create account" : "Sign in"}</button></div>
+      </form>
+    </div>
+  </div>
+}
+
+function Sidebar({page,setPage,mobile,setMobile}) {

@@ -91,3 +91,19 @@ CREATE TABLE study_group_members (
     joined_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     UNIQUE(group_id, user_id)
 );
+
+-- 11. Student Profiles
+CREATE TABLE student_profiles (
+    id SERIAL PRIMARY KEY,
+    user_id INTEGER UNIQUE REFERENCES users(id) ON DELETE CASCADE,
+    bio TEXT,
+    college VARCHAR(200),
+    department VARCHAR(100),
+    year VARCHAR(20),
+    location VARCHAR(100),
+    github_url VARCHAR(255),
+    linkedin_url VARCHAR(255),
+    career_goal VARCHAR(200),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);

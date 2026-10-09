@@ -1,0 +1,11 @@
+function App() {
+  const [view,setView]=useState("landing");
+  const [page,setPage]=useState("Dashboard");
+  const [mobile,setMobile]=useState(false);
+  if(view==="landing") return <Landing onGetStarted={()=>setView("register")} onLogin={()=>setView("login")}/>;
+  if(view==="login") return <Auth mode="login" onBack={()=>setView("register")} onSuccess={()=>setView("app")}/>;
+  if(view==="register") return <Auth mode="register" onBack={()=>setView("login")} onSuccess={()=>setView("app")}/>;
+  const content = page==="Dashboard"?<Dashboard setPage={setPage}/>:page==="My Profile"?<Profile/>:page==="My Skills"?<Skills/>:page==="Students"?<Students/>:page==="Projects"?<Projects/>:["AI Team Match","Skill Gap","Learning Path"].includes(page)?<AIPage type={page}/>:page==="Mentors"?<SimplePage title="Find a Mentor" kicker="MENTOR NETWORK" text="Connect with seniors and experienced students who can guide your next step." icon={<GraduationCap/>}/>:<SimplePage title="Study Groups" kicker="LEARN TOGETHER" text="Join focused groups for DSA, Java, placements, hackathons and more." icon={<Users/>}/>;
+  return <div className="app-shell"><Sidebar page={page} setPage={setPage} mobile={mobile} setMobile={setMobile}/><main className="main"><Topbar page={page} setMobile={setMobile}/>{content}</main></div>;
+}
+createRoot(document.getElementById("root")).render(<React.StrictMode><App/></React.StrictMode>);
