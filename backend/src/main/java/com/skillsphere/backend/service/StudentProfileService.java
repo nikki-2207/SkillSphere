@@ -72,8 +72,11 @@ public class StudentProfileService {
             String careerGoal) {
 
         StudentProfile profile = profileRepository.findByUserId(userId)
-                .orElseThrow(() ->
-                        new RuntimeException("Profile not found"));
+                .orElse(null);
+
+        if (profile == null) {
+            return createProfile(userId, bio, college, department, year, location, githubUrl, linkedinUrl, careerGoal);
+        }
 
         profile.setBio(bio);
         profile.setCollege(college);
